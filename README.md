@@ -6,7 +6,7 @@ A distributed system for real-time flight tracking over Brazil, built with moder
 
 This project implements a real-time flight tracking system that monitors aircraft movements over Brazilian airspace. The system processes flight data from OpenSky Network, performs real-time aggregations, and provides both user-facing and operational interfaces.
 
-![High-Level Architecture](img/arch_diagram_highlevel.png)
+![High-Level Architecture](img/diagrams/arch_diagram_highlevel.png)
 
 ## Components
 
@@ -97,10 +97,16 @@ realtime-flight-tracker/
 ├── flight-tracker-event-backoffice/        # React staff dashboard
 ├── flight-tracker-idm-server/              # Keycloak instance
 ├── docs/                                   # Documentation
+├── img/                                    # Project images and diagrams
+│   ├── arch_diagram_highlevel.png          # High-level architecture diagram
+│   └── arch_diagram_highlevel.excalidraw   # Excalidraw source file
 ├── scripts/                                # Utility scripts
+├── .gitignore                              # Git ignore rules for all submodules
 ├── LICENSE.md                              # MIT License
 └── .gitmodules                             # Git submodules configuration
 ```
+
+Note: Each submodule contains its own build and deployment configurations.
 
 ## Getting Started
 
