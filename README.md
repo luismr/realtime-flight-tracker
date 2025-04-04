@@ -1,3 +1,14 @@
+![Docker](https://img.shields.io/badge/Docker-28.0.4-orange)
+![Docker Compose](https://img.shields.io/badge/Docker--Compose-v2.34.0-orange)
+![Kafka](https://img.shields.io/badge/Kafka-4.x-red)
+![Redis](https://img.shields.io/badge/Redis-7.x-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-green)
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Java](https://img.shields.io/badge/Java-21-blue)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3.4.x-blue)
+![JUnit](https://img.shields.io/badge/JUnit-5-blue)
+![JaCoCo](https://img.shields.io/badge/JaCoCo-0.8.x-blue)
+
 # Real-Time Flight Tracker
 
 A distributed system for real-time flight tracking over Brazil, built with modern technologies and microservices architecture.
@@ -45,6 +56,7 @@ This project implements a real-time flight tracking system that monitors aircraf
   - WebSocket broadcasting
   - Flight route history
   - Real-time flight status
+- **Repository**: [flight-tracker-event-server-java](https://github.com/luismr/flight-tracker-event-server-java)
 
 ### Frontend Applications
 
