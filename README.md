@@ -1,15 +1,17 @@
+# Real-Time Flight Tracker
+
 ![Docker](https://img.shields.io/badge/Docker-28.0.4-orange)
 ![Docker Compose](https://img.shields.io/badge/Docker--Compose-v2.34.0-orange)
-![Kafka](https://img.shields.io/badge/Kafka-4.x-red)
+![Kafka](https://img.shields.io/badge/Kafka-4.x-red)  
+
 ![Redis](https://img.shields.io/badge/Redis-7.x-green)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-green)  
+
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-3.4.x-blue)
 ![JUnit](https://img.shields.io/badge/JUnit-5-blue)
 ![JaCoCo](https://img.shields.io/badge/JaCoCo-0.8.x-blue)
-
-# Real-Time Flight Tracker
 
 A distributed system for real-time flight tracking over Brazil, built with modern technologies and microservices architecture.
 
