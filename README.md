@@ -1,7 +1,12 @@
 # Real-Time Flight Tracker
 
 ![Docker](https://img.shields.io/badge/Docker-28.0.4-orange)
-![Docker Compose](https://img.shields.io/badge/Docker--Compose-v2.34.0-orange)
+![Docker Compose](https://img.shields.io/badge/Docker--Compose-v2.34.0-orange)  
+
+A distributed system for real-time flight tracking over Brazil, built with modern technologies and microservices architecture.
+
+## Overview
+
 ![Kafka](https://img.shields.io/badge/Kafka-4.x-red)  
 
 ![Redis](https://img.shields.io/badge/Redis-7.x-green)
@@ -11,11 +16,8 @@
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-3.4.x-blue)
 ![JUnit](https://img.shields.io/badge/JUnit-5-blue)
-![JaCoCo](https://img.shields.io/badge/JaCoCo-0.8.x-blue)
+![JaCoCo](https://img.shields.io/badge/JaCoCo-0.8.x-blue)  
 
-A distributed system for real-time flight tracking over Brazil, built with modern technologies and microservices architecture.
-
-## Overview
 
 This project implements a real-time flight tracking system that monitors aircraft movements over Brazilian airspace. The system processes flight data from OpenSky Network, performs real-time aggregations, and provides both user-facing and operational interfaces.
 
@@ -34,15 +36,7 @@ This project implements a real-time flight tracking system that monitors aircraf
   - Docker support with crontab scheduling
 - **Repository**: [flight-tracker-event-producer-python](https://github.com/luismr/flight-tracker-event-producer-python)
 
-#### 2. flight-tracker-event-consumer
-- **Technology**: Java 21 / SpringBoot
-- **Purpose**: Validates and persists flight tracking events
-- **Features**:
-  - Message validation
-  - Database persistence
-  - Event processing pipeline
-
-#### 3. flight-tracker-event-stream-processor
+#### 2. flight-tracker-event-stream-processor
 - **Technology**: Java 21 / SpringBoot
 - **Purpose**: Generates and maintains flight tracking aggregations
 - **Features**:
@@ -50,19 +44,22 @@ This project implements a real-time flight tracking system that monitors aircraf
   - Database updates
   - Performance optimizations
 
-#### 4. flight-tracker-event-server
+#### 3. flight-tracker-event-server
 - **Technology**: Java 21 / SpringBoot
-- **Purpose**: API and WebSocket server for flight tracking
+- **Purpose**: API and WebSocket server for flight tracking, validates and persists flight tracking events
 - **Features**:
   - REST API endpoints
   - WebSocket broadcasting
   - Flight route history
   - Real-time flight status
+  - Message validation
+  - Database persistence
+  - Event processing pipeline
 - **Repository**: [flight-tracker-event-server-java](https://github.com/luismr/flight-tracker-event-server-java)
 
 ### Frontend Applications
 
-#### 5. flight-tracker-event-app
+#### 4. flight-tracker-event-app
 - **Technology**: TypeScript / React
 - **Purpose**: User-facing flight tracking map interface
 - **Features**:
@@ -71,7 +68,7 @@ This project implements a real-time flight tracking system that monitors aircraf
   - WebSocket updates
   - Mobile-responsive design
 
-#### 6. flight-tracker-event-backoffice
+#### 5. flight-tracker-event-backoffice
 - **Technology**: TypeScript / React
 - **Purpose**: Operational dashboard for staff users
 - **Features**:
@@ -82,7 +79,7 @@ This project implements a real-time flight tracking system that monitors aircraf
 
 ### Infrastructure
 
-#### 7. flight-tracker-idm-server
+#### 6. flight-tracker-idm-server
 - **Technology**: Keycloak
 - **Purpose**: Identity and access management
 - **Features**:
@@ -91,12 +88,12 @@ This project implements a real-time flight tracking system that monitors aircraf
   - Role-based authorization
   - User management
 
-#### 8. Data Stores
+#### 7. Data Stores
 - **Kafka**: Event streaming platform
 - **Postgres + TimescaleDB**: Time-series data storage
 - **Redis**: Caching and real-time data
 
-#### 9. External Services
+#### 8. External Services
 - **OpenSky API**: Public flight data source
 
 ## Project Structure
@@ -104,9 +101,8 @@ This project implements a real-time flight tracking system that monitors aircraf
 ```
 realtime-flight-tracker/
 ├── flight-tracker-event-producer/          # Python OpenSky data fetcher
-├── flight-tracker-event-consumer/          # Java event consumer
 ├── flight-tracker-event-stream-processor/  # Java stream processor
-├── flight-tracker-event-server/            # Java API server
+├── flight-tracker-event-server/            # Java API server & event consumer
 ├── flight-tracker-event-app/               # React user map app
 ├── flight-tracker-event-backoffice/        # React staff dashboard
 ├── flight-tracker-idm-server/              # Keycloak instance
