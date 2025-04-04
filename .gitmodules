@@ -1,3 +1,6 @@
 [submodule "flight-tracker-event-producer"]
 	path = flight-tracker-event-producer
 	url = https://github.com/luismr/flight-tracker-event-producer-python.git
+[submodule "flight-tracker-event-server"]
+	path = flight-tracker-event-server
+	url = https://github.com/luismr/flight-tracker-event-server-java.git

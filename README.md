@@ -161,6 +161,20 @@ git push
 git submodule status
 ```
 
+#### Add a new submodule
+```bash
+# Add a submodule to the project
+git submodule add <repository-url> <local-directory-path>
+
+# Example - adding a new service
+git submodule add git@github.com:username/new-service.git flight-tracker-new-service
+
+# Update .gitmodules and commit
+git add .gitmodules
+git commit -m "Add new submodule: flight-tracker-new-service"
+git push
+```
+
 ## Development Workflow
 
 1. Start infrastructure services:
