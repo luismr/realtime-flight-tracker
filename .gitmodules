@@ -4,3 +4,6 @@
 [submodule "flight-tracker-event-server"]
 	path = flight-tracker-event-server
 	url = https://github.com/luismr/flight-tracker-event-server-java.git
+[submodule "flight-tracker-event-app"]
+	path = flight-tracker-event-app
+	url = git@github.com:luismr/flight-tracker-event-app.git
