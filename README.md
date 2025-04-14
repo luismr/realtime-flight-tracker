@@ -182,7 +182,7 @@ The project uses multiple Docker Compose files to manage different aspects of th
    - flight-tracker-event-server
    - Run with:
    ```bash
-   docker-compose -f docker-compose.yml -f docker-compose.backend.yml up -d
+   docker-compose -f docker-compose.yml -f docker-compose-backend.yml up -d
    ```
 
 To start all services at once:
@@ -192,6 +192,7 @@ docker-compose -f docker-compose.yml \
   -f docker-compose-cache.yml \
   -f docker-compose-stream.yml \
   -f docker-compose.backend.yml \
+  -f docker-compose-frontend.yml \
   up -d
 ```
 
@@ -201,7 +202,8 @@ docker-compose -f docker-compose.yml \
   -f docker-compose-db.yml \
   -f docker-compose-cache.yml \
   -f docker-compose-stream.yml \
-  -f docker-compose.backend.yml \
+  -f docker-compose-backend.yml \
+  -f docker-compose-frontend.yml \
   down
 ```
 
@@ -243,16 +245,6 @@ Once the services are running, you can access the following endpoints:
 #### Update all submodules to latest
 ```bash
 git submodule update --remote --merge
-```
-
-#### Checkout all submodules with latest changes
-```bash
-git submodule update --recursive --remote
-```
-
-#### Pull changes from main repository and submodules
-```bash
-git pull --recurse-submodules
 ```
 
 #### Push changes to a submodule
