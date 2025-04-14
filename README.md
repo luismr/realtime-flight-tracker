@@ -142,6 +142,90 @@ git submodule init
 git submodule update
 ```
 
+### Docker Compose Setup
+
+The project uses multiple Docker Compose files to manage different aspects of the infrastructure:
+
+1. **Base Network Setup** (`docker-compose.yml`):
+   - Sets up the shared network for all services
+   - Run first to create the network:
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Database Services** (`docker-compose-db.yml`):
+   - PostgreSQL writer and reader instances
+   - TimescaleDB for time-series data
+   - Run with:
+   ```bash
+   docker-compose -f docker-compose-db.yml up -d
+   ```
+
+3. **Cache Services** (`docker-compose-cache.yml`):
+   - Redis for caching and real-time data
+   - Run with:
+   ```bash
+   docker-compose -f docker-compose-cache.yml up -d
+   ```
+
+4. **Streaming Services** (`docker-compose-stream.yml`):
+   - Kafka cluster with 3 brokers
+   - Kafdrop UI for Kafka management
+   - Run with:
+   ```bash
+   docker-compose -f docker-compose-stream.yml up -d
+   ```
+
+To start all services at once:
+```bash
+docker-compose -f docker-compose.yml \
+  -f docker-compose-db.yml \
+  -f docker-compose-cache.yml \
+  -f docker-compose-stream.yml \
+  up -d
+```
+
+To stop all services:
+```bash
+docker-compose -f docker-compose.yml \
+  -f docker-compose-db.yml \
+  -f docker-compose-cache.yml \
+  -f docker-compose-stream.yml \
+  down
+```
+
+**Note**: Make sure to set up your `.env` file with the required environment variables before starting the services. The `.env` file should include:
+- PostgreSQL credentials
+- Kafka cluster configuration
+- Other service-specific settings
+
+### Public Server URLs
+
+Once the services are running, you can access the following endpoints:
+
+- **Kafdrop UI**: http://localhost:19000
+  - Kafka cluster management interface
+  - View topics, messages, and consumer groups
+  - Monitor broker status and metrics
+
+- **Kafka Brokers**:
+  - Broker 1: localhost:19092
+  - Broker 2: localhost:19093
+  - Broker 3: localhost:19094
+  - External access points for Kafka clients
+  - Each broker is part of the cluster
+
+- **PostgreSQL Writer**: localhost:5432
+  - Primary database instance
+  - Direct write operations
+
+- **PostgreSQL Reader**: localhost:5433
+  - Read replica instance
+  - Read-only operations
+
+- **Redis**: localhost:6379
+  - Cache and real-time data access
+
 ### Working with Submodules
 
 #### Update all submodules to latest

@@ -1,0 +1,62 @@
+# Database Writer/Reader Replication
+# Replication Setup
+services:  
+  # Database Writer
+  postgres_writer:
+    image: postgres:17
+    container_name: postgres_writer
+    env_file:
+      - .env
+    networks:
+      - flight-tracker-network
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_writer_data:/var/lib/postgresql/data
+      - ./scripts/postgres/initdb.d/00_init.sql:/docker-entrypoint-initdb.d/00_init.sql
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    command: postgres -c 'wal_level=replica' -c 'max_wal_senders=10' -c 'max_replication_slots=10' -c 'listen_addresses=*'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Database Reader
+  postgres_reader:
+    image: postgres:17
+    container_name: postgres_reader
+    env_file:
+      - .env
+    networks:
+      - flight-tracker-network
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_reader_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    command: >
+      bash -c "
+        echo 'Waiting for writer to be ready...';
+        while ! pg_isready -h postgres_writer -p 5432 -U ${POSTGRES_USER}; do sleep 1; done;
+        echo 'Writer is ready, starting replica...';
+        rm -rf /var/lib/postgresql/data/* 2>/dev/null || true;
+        PGPASSWORD=${POSTGRES_PASSWORD} pg_basebackup -h postgres_writer -U replica -D /var/lib/postgresql/data -Fp -Xs -R -P;
+        echo 'Replication setup complete, starting PostgreSQL...';
+        docker-entrypoint.sh postgres
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_writer_data:
+  postgres_reader_data:
