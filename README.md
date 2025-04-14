@@ -176,12 +176,22 @@ The project uses multiple Docker Compose files to manage different aspects of th
    docker-compose -f docker-compose-stream.yml up -d
    ```
 
+5. **Backend Services** (`docker-compose.backend.yml`):
+   - flight-tracker-event-producer
+   - flight-tracker-event-stream-processor
+   - flight-tracker-event-server
+   - Run with:
+   ```bash
+   docker-compose -f docker-compose.backend.yml up -d
+   ```
+
 To start all services at once:
 ```bash
 docker-compose -f docker-compose.yml \
   -f docker-compose-db.yml \
   -f docker-compose-cache.yml \
   -f docker-compose-stream.yml \
+  -f docker-compose.backend.yml \
   up -d
 ```
 
@@ -191,12 +201,14 @@ docker-compose -f docker-compose.yml \
   -f docker-compose-db.yml \
   -f docker-compose-cache.yml \
   -f docker-compose-stream.yml \
+  -f docker-compose.backend.yml \
   down
 ```
 
 **Note**: Make sure to set up your `.env` file with the required environment variables before starting the services. The `.env` file should include:
 - PostgreSQL credentials
 - Kafka cluster configuration
+- OpenSky Network API credentials
 - Other service-specific settings
 
 ### Public Server URLs
@@ -231,6 +243,11 @@ Once the services are running, you can access the following endpoints:
 #### Update all submodules to latest
 ```bash
 git submodule update --remote --merge
+```
+
+#### Checkout all submodules with latest changes
+```bash
+git submodule update --recursive --remote
 ```
 
 #### Pull changes from main repository and submodules
@@ -269,17 +286,6 @@ git commit -m "Add new submodule: flight-tracker-new-service"
 git push
 ```
 
-## Development Workflow
-
-1. Start infrastructure services:
-```bash
-docker-compose -f docker/docker-compose.yml up -d
-```
-
-2. Start individual components:
-- Follow README instructions in each submodule directory
-- Each component has its own build and run instructions
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
