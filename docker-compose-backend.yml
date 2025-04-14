@@ -44,22 +44,21 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       # Read-Write Routing Configuration
-      - SPRING_DATASOURCE_WRITER_JDBCURL=jdbc:postgresql://postgres-writer:5432/flighttracker
-      - SPRING_DATASOURCE_WRITER_USERNAME=${POSTGRES_USER}
-      - SPRING_DATASOURCE_WRITER_PASSWORD=${POSTGRES_PASSWORD}
-      - SPRING_DATASOURCE_READER_JDBCURL=jdbc:postgresql://postgres-reader:5432/flighttracker
-      - SPRING_DATASOURCE_READER_USERNAME=${POSTGRES_USER}
-      - SPRING_DATASOURCE_READER_PASSWORD=${POSTGRES_PASSWORD}
-      - APP_READ_WRITE_ROUTING_ENABLED=true
+      - SPRING_DATASOURCE_WRITER_JDBC_URL=${FLIGHT_TRACKER_EVENT_SERVER_WRITER_JDBC_URL}
+      - SPRING_DATASOURCE_WRITER_USERNAME=${FLIGHT_TRACKER_EVENT_SERVER_WRITER_JDBC_USERNAME}
+      - SPRING_DATASOURCE_WRITER_PASSWORD=${FLIGHT_TRACKER_EVENT_SERVER_WRITER_JDBC_PASSWORD}
+      - SPRING_DATASOURCE_READER_JDBC_URL=${FLIGHT_TRACKER_EVENT_SERVER_READER_JDBC_URL}
+      - SPRING_DATASOURCE_READER_USERNAME=${FLIGHT_TRACKER_EVENT_SERVER_READER_JDBC_USERNAME}
+      - SPRING_DATASOURCE_READER_PASSWORD=${FLIGHT_TRACKER_EVENT_SERVER_READER_JDBC_PASSWORD}
+      - APP_READ_WRITE_ROUTING_ENABLED=${FLIGHT_TRACKER_EVENT_SERVER_DATASOURCE_ROUTING_ENABLED}
       # Redis Configuration
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
       # Kafka Configuration
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker1:19092,broker2:19093,broker3:19094
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=${FLIGHT_TRACKER_EVENT_SERVER_KAFKA_BOOTSTRAP_SERVERS}
     networks:
       - flight-tracker-network
     volumes:
-      - ./flight-tracker-event-server:/app
       - flight-tracker-server-logs:/var/log
     depends_on:
       postgres_writer:
@@ -84,4 +83,5 @@ services:
 
 volumes:
   flight-tracker-producer-logs:
-  flight-tracker-server-logs: 
+  flight-tracker-server-logs:
+  maven-repo: 
