@@ -185,6 +185,11 @@ The project uses multiple Docker Compose files to manage different aspects of th
    docker-compose -f docker-compose.yml -f docker-compose-backend.yml up -d
    ```
 
+![Actual deployment ready-state](img/diagrams/arch_diagram_deploy_v1.png)
+
+> 1. This diagrams show the actual state of deployment using **docker-compose** stack
+> 2. V2 will bring the load balancer and scale groups for some *backend* and *frontend* services
+
 To start all services at once:
 ```bash
 docker-compose -f docker-compose.yml \
