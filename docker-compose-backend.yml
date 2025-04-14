@@ -3,6 +3,7 @@ services:
 
   # Flight Tracker Event Producer
   flight-tracker-event-producer:
+    container_name: flight-tracker-event-producer
     build:
       context: ./flight-tracker-event-producer
       dockerfile: Dockerfile

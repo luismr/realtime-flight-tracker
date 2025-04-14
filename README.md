@@ -158,14 +158,14 @@ The project uses multiple Docker Compose files to manage different aspects of th
    - TimescaleDB for time-series data
    - Run with:
    ```bash
-   docker-compose -f docker-compose-db.yml up -d
+   docker-compose -f docker-compose.yml -f docker-compose-db.yml up -d
    ```
 
 3. **Cache Services** (`docker-compose-cache.yml`):
    - Redis for caching and real-time data
    - Run with:
    ```bash
-   docker-compose -f docker-compose-cache.yml up -d
+   docker-compose -f docker-compose.yml -f docker-compose-cache.yml up -d
    ```
 
 4. **Streaming Services** (`docker-compose-stream.yml`):
@@ -173,7 +173,7 @@ The project uses multiple Docker Compose files to manage different aspects of th
    - Kafdrop UI for Kafka management
    - Run with:
    ```bash
-   docker-compose -f docker-compose-stream.yml up -d
+   docker-compose -f docker-compose.yml -f docker-compose-stream.yml up -d
    ```
 
 5. **Backend Services** (`docker-compose.backend.yml`):
@@ -182,7 +182,7 @@ The project uses multiple Docker Compose files to manage different aspects of th
    - flight-tracker-event-server
    - Run with:
    ```bash
-   docker-compose -f docker-compose.backend.yml up -d
+   docker-compose -f docker-compose.yml -f docker-compose.backend.yml up -d
    ```
 
 To start all services at once:
